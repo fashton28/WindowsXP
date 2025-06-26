@@ -7,7 +7,7 @@ const Panel = ({notes, setNotes, setSideBar, lastPosition, setLastPosition}) => 
     const lastPos = lastNote && lastNote.position ? lastNote.position : { x: 0, y: 0 };
     const newPos = {x:lastPos.x, y:lastPos.y + 60};
     setLastPosition(newPos);
-    setNotes([...notes, { title: "hello", content: "", position: newPos }]);
+    setNotes([...notes, { title: `note${notes.length + 1}`, content: "", position: newPos }]);
     console.log(notes);
     
   };
