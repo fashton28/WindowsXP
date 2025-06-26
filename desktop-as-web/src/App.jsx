@@ -2,12 +2,14 @@ import { useState,useEffect } from 'react'
 import SearchBar from './components/SearchBar'
 import Panel from './components/Panel'
 import Note from './components/note'
+import Tab from './components/window'
 import { DndContext } from '@dnd-kit/core';
 import './App.css'
 
 function App() {
   const [sideBar, setSideBar] = useState(false);
   const [notes, setNotes] = useState([])
+  const [tabs, setTabs] = useState([])
   const [lastPosition, setLastPosition] = useState({x:"", y:""})
 
   const handleDragEnd = (event) => {
@@ -47,10 +49,16 @@ function App() {
               lastPosition = {lastPosition}
               setLastPosition = {setLastPosition}
               idx={idx}
+              tabs ={tabs}
+              setNotes = {setTabs}
             />
           ))}
         </div>
       </DndContext>
+
+      <div>
+        {/* <Tab /> */}
+      </div>
 
       <div className='absolute bottom-0 w-full'>
         <SearchBar sideBar = {sideBar} setSideBar={setSideBar}/>
