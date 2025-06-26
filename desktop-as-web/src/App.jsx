@@ -1,34 +1,42 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useState,useEffect } from 'react'  
+import SearchBar from './components/SearchBar'
+import Panel from './components/Panel'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  const [sideBar, setSideBar] = useState(false)
+  useEffect (() =>{
+    console.log(sideBar)
+  },[sideBar])
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div
+      className='w-screen h-screen bg-cover bg-center bg-no-repeat bg-[url(/src/assets/windowsxp.jpeg)] overflow-hidden'
+      style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', overflow: 'hidden' }}>
+
+    
+      <div id='panel' className='absolute bottom-8'>
+        {sideBar ? <Panel /> : null}
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <div className='absolute bottom-0 w-full'>
+        <SearchBar sideBar = {sideBar} setSideBar={setSideBar}/>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    </div>
   )
 }
 
