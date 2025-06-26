@@ -1,37 +1,53 @@
 import { useState,useEffect } from 'react'  
 import SearchBar from './components/SearchBar'
 import Panel from './components/Panel'
+import Note from './components/note'
+import { DndContext } from '@dnd-kit/core';
 import './App.css'
 
 function App() {
-  const [sideBar, setSideBar] = useState(false)
-  useEffect (() =>{
-    console.log(sideBar)
-  },[sideBar])
+  const [sideBar, setSideBar] = useState(false);
+  const [notes, setNotes] = useState([])
+
+  const handleDragEnd = (event) => {
+    const {active, delta} = event;
+    const idx = notes.findIndex((_, i) => `note-${i}` === active.id);
+    if (idx === -1) return;
+    setNotes(notes => notes.map((note, i) => {
+      if (i !== idx) return note;
+      const prev = note.position || {x: 0, y: 0};
+      return {
+        ...note,
+        position: {
+          x: prev.x + delta.x,
+          y: prev.y + delta.y
+        }
+      };
+    }));
+  };
+
   return (
     <div
       className='w-screen h-screen bg-cover bg-center bg-no-repeat bg-[url(/src/assets/windowsxp.jpeg)] overflow-hidden'
       style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', overflow: 'hidden' }}>
-
-    
       <div id='panel' className='absolute bottom-8'>
-        {sideBar ? <Panel /> : null}
+        {sideBar ? <Panel notes = {notes} setNotes = {setNotes} setSideBar = {setSideBar} /> : null}
       </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+      <DndContext onDragEnd={handleDragEnd}>
+        <div className=' bg-transparent w-100 h-100 flex-col'>
+          {notes && notes.map((note, idx) => (
+            <Note
+              key={idx}
+              id={"note-" + idx}
+              title={note.title}
+              content={note.content}
+              position={note.position}
+              idx={idx}
+            />
+          ))}
+        </div>
+      </DndContext>
 
       <div className='absolute bottom-0 w-full'>
         <SearchBar sideBar = {sideBar} setSideBar={setSideBar}/>
