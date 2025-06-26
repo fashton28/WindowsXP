@@ -8,6 +8,7 @@ import './App.css'
 function App() {
   const [sideBar, setSideBar] = useState(false);
   const [notes, setNotes] = useState([])
+  const [lastPosition, setLastPosition] = useState({x:"", y:""})
 
   const handleDragEnd = (event) => {
     const {active, delta} = event;
@@ -31,11 +32,11 @@ function App() {
       className='w-screen h-screen bg-cover bg-center bg-no-repeat bg-[url(/src/assets/windowsxp.jpeg)] overflow-hidden'
       style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', overflow: 'hidden' }}>
       <div id='panel' className='absolute bottom-8'>
-        {sideBar ? <Panel notes = {notes} setNotes = {setNotes} setSideBar = {setSideBar} /> : null}
+        {sideBar ? <Panel notes = {notes} setNotes = {setNotes} setSideBar = {setSideBar} lastPosition = {lastPosition} setLastPosition = {setLastPosition} /> : null}
       </div>
 
       <DndContext onDragEnd={handleDragEnd}>
-        <div className=' bg-transparent w-100 h-100 flex-col'>
+        <div className=' bg-transparent w-100 h-100 flex-col '>
           {notes && notes.map((note, idx) => (
             <Note
               key={idx}
@@ -43,6 +44,8 @@ function App() {
               title={note.title}
               content={note.content}
               position={note.position}
+              lastPosition = {lastPosition}
+              setLastPosition = {setLastPosition}
               idx={idx}
             />
           ))}
