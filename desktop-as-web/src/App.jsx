@@ -8,25 +8,46 @@ import './App.css'
 
 function App() {
   const [sideBar, setSideBar] = useState(false);
-  const [notes, setNotes] = useState([])
-  const [tabs, setTabs] = useState([])
-  const [lastPosition, setLastPosition] = useState({x:"", y:""})
+  const [notes, setNotes] = useState([]);
+  const [tabs, setTabs] = useState([]);
+  const [lastPosition, setLastPosition] = useState({x: 0, y: 0})
 
   const handleDragEnd = (event) => {
     const {active, delta} = event;
-    const idx = notes.findIndex((_, i) => `note-${i}` === active.id);
-    if (idx === -1) return;
-    setNotes(notes => notes.map((note, i) => {
-      if (i !== idx) return note;
-      const prev = note.position || {x: 0, y: 0};
-      return {
-        ...note,
-        position: {
-          x: prev.x + delta.x,
-          y: prev.y + delta.y
-        }
-      };
-    }));
+    
+    // Handle notes (numeric IDs)
+    if (typeof active.id === 'number') {
+      const idx = notes.findIndex((_, i) => i === active.id);
+      if (idx !== -1) {
+        setNotes(notes => notes.map((note, i) => {
+          if (i !== idx) return note;
+          const prev = note.position || {x: 0, y: 0};
+          return {
+            ...note,
+            position: {
+              x: prev.x + delta.x,
+              y: prev.y + delta.y
+            }
+          };
+        }));
+      }
+    }
+    
+    // Handle tabs (string IDs with 'tab-' prefix)
+    if (typeof active.id === 'string' && active.id.startsWith('tab-')) {
+      const tabId = parseInt(active.id.replace('tab-', ''));
+      setTabs(tabs => tabs.map((tab, i) => {
+        if (i !== tabId) return tab;
+        const prev = tab.position || {x: 100 + i * 50, y: 100 + i * 50};
+        return {
+          ...tab,
+          position: {
+            x: prev.x + delta.x,
+            y: prev.y + delta.y
+          }
+        };
+      }));
+    }
   };
 
   return (
@@ -42,7 +63,7 @@ function App() {
           {notes && notes.map((note, idx) => (
             <Note
               key={idx}
-              id={"note-" + idx}
+              id={idx}
               title={note.title}
               content={note.content}
               position={note.position}
@@ -50,14 +71,22 @@ function App() {
               setLastPosition = {setLastPosition}
               idx={idx}
               tabs ={tabs}
-              setNotes = {setTabs}
+              setTabs = {setTabs}
             />
           ))}
         </div>
       </DndContext>
 
       <div>
-        {/* <Tab /> */}
+        {tabs.length > 0 && tabs.map((tab, idx) => (
+              <Tab
+                key={idx}
+                id={idx}
+                title={tab.mainTitle?.title || `Tab ${idx + 1}`}
+                content={tab.innerText || ""}
+                position={tab.position || { x: 100 + idx * 50, y: 100 + idx * 50 }}
+              />
+            ))}
       </div>
 
       <div className='absolute bottom-0 w-full'>

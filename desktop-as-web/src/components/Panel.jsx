@@ -7,13 +7,13 @@ const Panel = ({notes, setNotes, setSideBar, lastPosition, setLastPosition}) => 
     const lastPos = lastNote && lastNote.position ? lastNote.position : { x: 0, y: 0 };
     const newPos = {x:lastPos.x, y:lastPos.y + 60};
     setLastPosition(newPos);
-    setNotes([...notes, { title: `note${notes.length + 1}`, content: "", position: newPos }]);
+    setNotes([...notes, { title: `note${notes.length + 1}.txt`, content: "", position: newPos }]);
     console.log(notes);
     
   };
 
   return (
-    <div className='bg-gradient-to-b from-blue-800 to-blue-500 w-90 h-115 rounded' >
+    <div className='bg-gradient-to-b from-blue-800 to-blue-500 w-90 h-115 rounded z-50' >
         <div className='p-2 border-b-1' style={{ borderBottomColor: 'orange' }}>
             <div className='flex items-center gap-5'>
                 <img src="/src/assets/selfie.jpeg" alt="" className='w-10 h-10 border-2 border-white rounded' />
@@ -42,7 +42,7 @@ const Panel = ({notes, setNotes, setSideBar, lastPosition, setLastPosition}) => 
 
 
             <div className='flex flex-col bg-blue-200 w-50 h-90 absolute bottom-10.5 right-0 p-1 gap-1 flex-end'>
-                    <button className='cursor-pointer hover:bg-blue-500' onClick={handleCreateNote}>Create New note</button>
+                    <button className='cursor-pointer hover:bg-blue-500' onClick={handleCreateNote}>Leave a note</button>
                     <div className='mt-2 flex flex-col gap-2'>
                       
               

@@ -1,47 +1,44 @@
 import React, { useState } from 'react'
 import { useDraggable } from '@dnd-kit/core'
 
-const DraggableNote = ({ id, position, children, dragListeners }) => {
-  const {attributes, setNodeRef, transform} = useDraggable({id});
+const DraggableNote = ({ id, position, children, isEditing }) => {
+  const {attributes, setNodeRef, transform} = useDraggable({id, disabled: isEditing});
   const style = {
     position: 'absolute',
     left: (position?.x || 0) + (transform ? transform.x : 0),
     top: (position?.y || 0) + (transform ? transform.y : 0),
     zIndex: 10,
-    cursor: 'move',
+    cursor: isEditing ? 'default' : 'move',
   };
-//Create New Tab with Dragability just like the notes. and a text area
 
   return (
-    <div ref={setNodeRef} style={style} {...dragListeners} {...attributes}>
+    <div ref={setNodeRef} style={style} {...attributes}>
         {children}
     </div>
   );
 };
 
 
-const Note = ({title, content, id, position, tabs, setTabs}) => {
+const Note = ({title, content, id,position, tabs, setTabs}) => {
   const [isEditing, setIsEditing] = useState(false);
   const [inputValue, setInputValue] = useState(title);
-  const { listeners } = useDraggable({ id });
 
   const handleCreateTab = () => {
-    const lastNote = notes.length > 0 ? notes[notes.length - 1] : null;
-    const lastPos = lastNote && lastNote.position ? lastNote.position : { x: 0, y: 0 };
-    const newPos = {x:lastPos.x, y:lastPos.y + 60};
-    setLastPosition(newPos);
-    setTabs([...tabs, { mainTitle: {title}, innerText: "" }]);
-    console.log(tabs);
-    
+    const newTab = {
+      mainTitle: { title: inputValue },
+      innerText: "",
+      position: { x: 100 + tabs.length * 50, y: 100 + tabs.length * 50 }
+    };
+    setTabs([...tabs, newTab]);
   };
 
   return (
-    <DraggableNote id={id} position={position} dragListeners={isEditing ? {} : listeners}>
+    <DraggableNote id={id} position={position} isEditing={isEditing}>
       <div className='flex flex-col items-center justify-center w-20 h-20'>
         <button className='cursor-pointer' onDoubleClick={handleCreateTab}><img src="/src/assets/notes.webp" alt="" /></button>
         {isEditing ? (
           <input
-S            type="text"
+            type="text"
             className='w-30 bg-blue-200 border-none outline-none'
             autoFocus
             value={inputValue}
