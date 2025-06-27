@@ -1,7 +1,7 @@
 import { useState,useEffect } from 'react'  
 import SearchBar from './components/SearchBar'
 import Panel from './components/Panel'
-import Note from './components/note'
+import Note from './components/Note'
 import Tab from './components/window'
 import { DndContext } from '@dnd-kit/core';
 import './App.css'
@@ -72,6 +72,8 @@ function App() {
               idx={idx}
               tabs ={tabs}
               setTabs = {setTabs}
+              notes = {notes}
+              setNotes = {setNotes}
             />
           ))}
         </div>

@@ -19,7 +19,7 @@ const DraggableNote = ({ id, position, children, isEditing }) => {
 };
 
 
-const Note = ({title, content, id,position, tabs, setTabs}) => {
+const Note = ({title, content, id,position, tabs, setTabs, notes, setNotes}) => {
   const [isEditing, setIsEditing] = useState(false);
   const [inputValue, setInputValue] = useState(title);
 
@@ -30,12 +30,20 @@ const Note = ({title, content, id,position, tabs, setTabs}) => {
       position: { x: 100 + tabs.length * 50, y: 100 + tabs.length * 50 }
     };
     setTabs([...tabs, newTab]);
+    // Set notes[id].isOpen = false after creating the tab
+    setNotes(notes => notes.map((note, idx) => {
+      if (idx === id) {
+        return { ...note, isOpen: true };
+      }
+      return note;
+    }));
+
   };
 
   return (
     <DraggableNote id={id} position={position} isEditing={isEditing}>
       <div className='flex flex-col items-center justify-center w-20 h-20'>
-        <button className='cursor-pointer' onDoubleClick={handleCreateTab}><img src="/src/assets/notes.webp" alt="" /></button>
+        <button className='cursor-pointer' onDoubleClick={!notes[id].isOpen ? handleCreateTab : null}><img src="/src/assets/notes.webp" alt="" /></button>
         {isEditing ? (
           <input
             type="text"
