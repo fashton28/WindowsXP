@@ -1,16 +1,8 @@
-import React, { useState } from 'react'
+import React from 'react'
+import useStore from '../store/useStore';
 
-const Panel = ({notes, setNotes, setSideBar, lastPosition, setLastPosition}) => {
-  const handleCreateNote = () => {
-    setSideBar(false);
-    const lastNote = notes.length > 0 ? notes[notes.length - 1] : null;
-    const lastPos = lastNote && lastNote.position ? lastNote.position : { x: 0, y: 0 };
-    const newPos = {x:lastPos.x, y:lastPos.y + 60};
-    setLastPosition(newPos);
-    setNotes([...notes, { title: `note${notes.length + 1}.txt`, content: "", position: newPos, isOpen: false }]);
-    console.log(notes);
-    
-  };
+const Panel = () => {
+  const handleCreateNote = useStore((state) => state.createNote);
 
   return (
     <div className='bg-gradient-to-b from-blue-800 to-blue-500 w-90 h-115 rounded z-50' >
@@ -40,12 +32,9 @@ const Panel = ({notes, setNotes, setSideBar, lastPosition, setLastPosition}) => 
                 </div>
             </div>
 
-
             <div className='flex flex-col bg-blue-200 w-50 h-90 absolute bottom-10.5 right-0 p-1 gap-1 flex-end'>
                     <button className='cursor-pointer hover:bg-blue-500' onClick={handleCreateNote}>Leave a note</button>
                     <div className='mt-2 flex flex-col gap-2'>
-                      
-              
                     </div>
             </div>
         </div>

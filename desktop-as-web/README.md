@@ -1,12 +1,21 @@
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# WindowsXP
+Desktop as a website portfolio - Replication the WindowsXP vibe
 
-Currently, two official plugins are available:
+To-Do List — Windows XP-Style React Desktop App
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+XP-style full-screen background
+[] Draggable desktop icons that open apps
+[] Window system: move, focus, close, (optional: resize/minimize)
 
-## Expanding the ESLint configuration
+[X] Creating notes and files ---> Working through creating notes     
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+[X] Notepad app (with text input and optional save)
+
+[X] Taskbar with open windows, clock, Start button & menu
+[X] Right-click desktop context menu (New Folder, Refresh, Properties)
+[X] Shutdown/restart simulation (fullscreen modal)
+
+
+[] Global state management (Zustand) --> or pass to function argument (Optional)
+[X] XP-style UI (CSS or Tailwind)

@@ -1,20 +1,24 @@
-import { useState,useEffect } from 'react'  
+import { useEffect } from 'react'
 import SearchBar from './components/SearchBar'
 import Panel from './components/Panel'
 import Note from './components/Note'
 import Tab from './components/window'
 import { DndContext } from '@dnd-kit/core';
 import './App.css'
+import useStore from './store/useStore';
 
 function App() {
-  const [sideBar, setSideBar] = useState(false);
-  const [notes, setNotes] = useState([]);
-  const [tabs, setTabs] = useState([]);
-  const [lastPosition, setLastPosition] = useState({x: 0, y: 0})
+  const sideBar = useStore((state) => state.sideBar[0]);
+  const setSideBar = useStore((state) => state.setSideBar);
+  const notes = useStore((state) => state.notes);
+  const tabs = useStore((state) => state.tabs);
+  const lastPosition = useStore((state) => state.lastPosition[0]);
+  const setLastPosition = useStore((state) => state.setLastPosition);
+  const setNotes = useStore((state) => state.setNotes);
+  const setTabs = useStore((state) => state.setTabs);
 
   const handleDragEnd = (event) => {
     const {active, delta} = event;
-    
     // Handle notes (numeric IDs)
     if (typeof active.id === 'number') {
       const idx = notes.findIndex((_, i) => i === active.id);
@@ -32,7 +36,6 @@ function App() {
         }));
       }
     }
-    
     // Handle tabs (string IDs with 'tab-' prefix)
     if (typeof active.id === 'string' && active.id.startsWith('tab-')) {
       const tabId = parseInt(active.id.replace('tab-', ''));
@@ -55,7 +58,7 @@ function App() {
       className='w-screen h-screen bg-cover bg-center bg-no-repeat bg-[url(/src/assets/windowsxp.jpeg)] overflow-hidden'
       style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', overflow: 'hidden' }}>
       <div id='panel' className='absolute bottom-8'>
-        {sideBar ? <Panel notes = {notes} setNotes = {setNotes} setSideBar = {setSideBar} lastPosition = {lastPosition} setLastPosition = {setLastPosition} /> : null}
+        {sideBar ? <Panel /> : null}
       </div>
 
       <DndContext onDragEnd={handleDragEnd}>
@@ -67,13 +70,7 @@ function App() {
               title={note.title}
               content={note.content}
               position={note.position}
-              lastPosition = {lastPosition}
-              setLastPosition = {setLastPosition}
               idx={idx}
-              tabs ={tabs}
-              setTabs = {setTabs}
-              notes = {notes}
-              setNotes = {setNotes}
             />
           ))}
         </div>
@@ -92,7 +89,7 @@ function App() {
       </div>
 
       <div className='absolute bottom-0 w-full'>
-        <SearchBar sideBar = {sideBar} setSideBar={setSideBar}/>
+        <SearchBar />
       </div>
     </div>
   )

@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useDraggable } from '@dnd-kit/core'
+import useStore from '../store/useStore';
 
 const DraggableNote = ({ id, position, children, isEditing }) => {
   const {attributes, setNodeRef, transform} = useDraggable({id, disabled: isEditing});
@@ -18,10 +19,13 @@ const DraggableNote = ({ id, position, children, isEditing }) => {
   );
 };
 
-
-const Note = ({title, content, id,position, tabs, setTabs, notes, setNotes}) => {
+const Note = ({title, content, id, position, idx}) => {
   const [isEditing, setIsEditing] = useState(false);
   const [inputValue, setInputValue] = useState(title);
+  const tabs = useStore((state) => state.tabs);
+  const setTabs = useStore((state) => state.setTabs);
+  const notes = useStore((state) => state.notes);
+  const setNotes = useStore((state) => state.setNotes);
 
   const handleCreateTab = () => {
     const newTab = {
@@ -30,14 +34,12 @@ const Note = ({title, content, id,position, tabs, setTabs, notes, setNotes}) => 
       position: { x: 100 + tabs.length * 50, y: 100 + tabs.length * 50 }
     };
     setTabs([...tabs, newTab]);
-    // Set notes[id].isOpen = false after creating the tab
-    setNotes(notes => notes.map((note, idx) => {
-      if (idx === id) {
+    setNotes(notes => notes.map((note, i) => {
+      if (i === id) {
         return { ...note, isOpen: true };
       }
       return note;
     }));
-
   };
 
   return (
