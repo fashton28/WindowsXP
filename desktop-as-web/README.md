@@ -17,5 +17,5 @@ XP-style full-screen background
 [X] Shutdown/restart simulation (fullscreen modal)
 
 
-[] Global state management (Zustand) --> or pass to function argument (Optional)
+[X] Global state management (Zustand) --> or pass to function argument (Optional)
 [X] XP-style UI (CSS or Tailwind)
