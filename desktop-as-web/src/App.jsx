@@ -6,6 +6,7 @@ import Tab from './components/window'
 import { DndContext } from '@dnd-kit/core';
 import './App.css'
 import useStore from './store/useStore';
+import Icons from './components/icons';
 
 function App() {
   const sideBar = useStore((state) => state.sideBar[0]);
@@ -61,20 +62,11 @@ function App() {
         {sideBar ? <Panel /> : null}
       </div>
 
-      <DndContext onDragEnd={handleDragEnd}>
-        <div className=' bg-transparent w-100 h-100 flex-col '>
-          {notes && notes.map((note, idx) => (
-            <Note
-              key={idx}
-              id={idx}
-              title={note.title}
-              content={note.content}
-              position={note.position}
-              idx={idx}
-            />
-          ))}
-        </div>
-      </DndContext>
+      <div className=''>
+        <Icons />
+      </div>
+
+
 
       <div>
         {tabs.length > 0 && tabs.map((tab, idx) => (

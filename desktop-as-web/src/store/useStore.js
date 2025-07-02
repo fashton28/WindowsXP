@@ -5,23 +5,24 @@ const useStore = create((set, get) => ({
     notes: [],
     tabs: [],
     lastPosition: [{ x: 0, y: 0 }],
+    icons: [],
     // ... other state
   
     createNote: () => {
       const notes = get().notes;
       const lastNote = notes.length > 0 ? notes[notes.length - 1] : null;
-      const lastPos = lastNote && lastNote.position ? lastNote.position : { x: 0, y: 0 };
-      const newPos = { x: lastPos.x, y: lastPos.y + 60 };
-  
+      // const lastPos = lastNote && lastNote.position ? lastNote.position : { x: 0, y: 0 };
+      // const newPos = { x: lastPos.x, y: lastPos.y + 60 };
+
       set((state) => ({
         sideBar: [false],
-        lastPosition: [newPos],
+        // lastPosition: [newPos],
         notes: [
           ...state.notes,
           {
             title: `note${state.notes.length + 1}.txt`,
             content: "",
-            position: newPos,
+            // position: newPos,
             isOpen: false,
           },
         ],
