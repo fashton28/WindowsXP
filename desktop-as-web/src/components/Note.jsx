@@ -26,11 +26,12 @@ const Note = ({title, content, id, position, idx}) => {
   const setTabs = useStore((state) => state.setTabs);
   const notes = useStore((state) => state.notes);
   const setNotes = useStore((state) => state.setNotes);
+   const isOpen = useStore((state) => state.notes[id].isOpen);
 
   const handleCreateTab = () => {
     const newTab = {
       mainTitle: { title: inputValue },
-      innerText: "",
+      FinnerText: "",
       position: { x: 100 + tabs.length * 50, y: 100 + tabs.length * 50 }
     };
     setTabs([...tabs, newTab]);
@@ -45,7 +46,21 @@ const Note = ({title, content, id, position, idx}) => {
   return (
     <DraggableNote id={id} position={position} isEditing={isEditing}>
       <div className='flex flex-col items-center justify-center w-20 h-20'>
-        <button className='cursor-pointer' onDoubleClick={!notes[id].isOpen ? handleCreateTab : null}><img src="/src/assets/notes.webp" alt="" /></button>
+        <button
+          className='cursor-pointer'
+          onDoubleClick={() => {
+            setNotes(notes =>
+              notes.map((note, i) =>
+                i === id ? { ...note, isOpen: true } : note
+              )
+            );
+            if (!notes[id].isOpen) {
+              handleCreateTab();
+            }
+          }}
+        >
+          <img src="/src/assets/notes.webp" alt="" />
+        </button>
         {isEditing ? (
           <input
             type="text"
@@ -55,10 +70,10 @@ const Note = ({title, content, id, position, idx}) => {
             onChange={e => setInputValue(e.target.value)}
             onBlur={() => setIsEditing(false)}
             onKeyDown={e => {
-            if (e.key === 'Enter') {
-              setIsEditing(false);
-            }
-          }}
+              if (e.key === 'Enter') {
+                setIsEditing(false);
+              }
+            }}
           />
         ) : (
           <h1 onDoubleClick={() => setIsEditing(true)}>{inputValue}</h1>

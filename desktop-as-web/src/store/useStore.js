@@ -24,6 +24,7 @@ const useStore = create((set, get) => ({
             content: "",
             // position: newPos,
             isOpen: false,
+            isExpanded: false,
           },
         ],
       }));
