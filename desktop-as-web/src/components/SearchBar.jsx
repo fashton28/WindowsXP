@@ -15,17 +15,17 @@ const SearchBar = () => {
             setSideBar((prev) => [!prev[0]]);
             if (!window._winxpAudioPlayed) {
               window._winxpAudioPlayed = true;
-              const audio = new Audio('/src/assets/winxp.mp3');
+              const audio = new Audio('/assets/winxp.mp3');
               audio.play();
             }
           }}
         >
-          <img src="/src/assets/startButton.png" alt="startButton" className='w-25'/>
+          <img src="/assets/startButton.png" alt="startButton" className='w-25'/>
         </button>
         <div id='utilities' className='bg-blue-500 w-20 h-8 rounded flex justify-center items-center gap-1'>
-             <img src="/src/assets/sound.png" alt="startButton" className="w-4 h-4"/>
-             <img src="/src/assets/computerIcon.png" alt="startButton" className="w-4 h-4"/>
-             <img src="/src/assets/virus.png" alt="startButton" className="w-4 h-4"/>
+             <img src="/assets/sound.png" alt="startButton" className="w-4 h-4"/>
+             <img src="/assets/computerIcon.png" alt="startButton" className="w-4 h-4"/>
+             <img src="/assets/virus.png" alt="startButton" className="w-4 h-4"/>
         </div>
       </div>
     </div>

@@ -56,7 +56,7 @@ function App() {
 
   return (
     <div
-      className='w-screen h-screen bg-cover bg-center bg-no-repeat bg-[url(/src/assets/windowsxp.jpeg)] overflow-hidden'
+      className='w-screen h-screen bg-cover bg-center bg-no-repeat bg-[url(/assets/windowsxp.jpeg)] overflow-hidden'
       style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', overflow: 'hidden' }}>
       <div id='panel' className='absolute bottom-8'>
         {sideBar ? <Panel /> : null}

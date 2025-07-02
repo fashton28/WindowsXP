@@ -59,7 +59,7 @@ const Note = ({title, content, id, position, idx}) => {
             }
           }}
         >
-          <img src="/src/assets/notes.webp" alt="" />
+          <img src="/assets/notes.webp" alt="" />
         </button>
         {isEditing ? (
           <input

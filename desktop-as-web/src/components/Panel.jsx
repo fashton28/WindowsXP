@@ -8,7 +8,7 @@ const Panel = () => {
     <div className='bg-gradient-to-b from-blue-800 to-blue-500 w-90 h-115 rounded z-50' >
         <div className='p-2 border-b-1' style={{ borderBottomColor: 'orange' }}>
             <div className='flex items-center gap-5'>
-                <img src="/src/assets/selfie.jpeg" alt="" className='w-10 h-10 border-2 border-white rounded' />
+                <img src="/assets/selfie.jpeg" alt="" className='w-10 h-10 border-2 border-white rounded' />
                 <h1 className='bold text-lg text-white'>Fabian</h1>
             </div>
         </div>
@@ -16,19 +16,19 @@ const Panel = () => {
         <div className='flex items-center'>
             <div className='flex flex-col bg-white w-50 h-90 absolute bottom-10.5 p-1 gap-1'>
                 <div className='hover:bg-blue-800 hover:text-white px-3 py-2 rounded cursor-pointer w-full flex gap-4'>
-                    <img src="/src/assets/sound.png" alt="" /> <span>My Resume</span>
+                    <img src="/assets/sound.png" alt="" /> <span>My Resume</span>
                 </div>
                 <div className='hover:bg-blue-800  hover:text-white px-3 py-2 rounded cursor-pointer w-full flex gap-4'>
-                    <img src="/src/assets/virus.png" alt="" /><span>Github</span>
+                    <img src="/assets/virus.png" alt="" /><span>Github</span>
                 </div>
                 <div className='hover:bg-blue-800  hover:text-white px-3 py-2 rounded cursor-pointer w-full flex gap-4'>
-                    <img src="/src/assets/computerIcon.png" alt="" /><span>Linkedin</span>
+                    <img src="/assets/computerIcon.png" alt="" /><span>Linkedin</span>
                 </div>
                 <div className='hover:bg-blue-800  hover:text-white px-3 py-2 rounded cursor-pointer w-full flex gap-4'>
-                    <img src="/src/assets/sound.png" alt="" /> <span>some work</span>
+                    <img src="/assets/sound.png" alt="" /> <span>some work</span>
                 </div>
                 <div className='hover:bg-blue-800  hover:text-white px-3 py-2 rounded cursor-pointer w-full flex gap-4'>
-                   <img src="/src/assets/virus.png" alt="" /><span>Paint</span>
+                   <img src="/assets/virus.png" alt="" /><span>Paint</span>
                 </div>
             </div>
 
